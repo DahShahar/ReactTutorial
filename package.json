@@ -1,0 +1,20 @@
+{
+  "name": "reacttutorial",
+  "version": "1.0.0",
+  "description": "Following the guide here: https://medium.com/@TeeFouad/create-a-react-application-from-scratch-part-2-initialization-and-the-first-file-c7e0ecdaa6bf",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DahShahar/ReactTutorial.git"
+  },
+  "author": "Shahar Dahan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DahShahar/ReactTutorial/issues"
+  },
+  "homepage": "https://github.com/DahShahar/ReactTutorial#readme"
+}
