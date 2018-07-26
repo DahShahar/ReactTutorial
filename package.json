@@ -45,6 +45,8 @@
     "pug": "^2.0.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "svg-inline-loader": "^0.8.0",
@@ -61,6 +63,7 @@
     "eslint-plugin-react": "^7.10.0",
     "nodemon": "^1.18.3",
     "pre-commit": "^1.2.2",
+    "serviceworker-webpack-plugin": "^1.0.0-alpha02",
     "webpack-cli": "^3.1.0",
     "webpack-hot-middleware": "^2.22.3"
   }
