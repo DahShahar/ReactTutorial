@@ -1,21 +1,35 @@
 import React from 'react';
 import FilterLink from '../containers/FilterLink';
-import { VisibilityFilters } from '../actions/actions';
+import SortLink from '../containers/SortLink';
+import { SortFilters, VisibilityFilters } from '../actions/actions';
 
 const Footer = () => (
   <div>
-    <span>
-      Show:
-    </span>
-    <FilterLink filter={VisibilityFilters.SHOW_ALL}>
-      All
-    </FilterLink>
-    <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>
-      Active
-    </FilterLink>
-    <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
-      Completed
-    </FilterLink>
+    <div>
+      <span>
+        Show:
+      </span>
+      <FilterLink filter={VisibilityFilters.SHOW_ALL}>
+        All
+      </FilterLink>
+      <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>
+        Active
+      </FilterLink>
+      <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
+        Completed
+      </FilterLink>
+    </div>
+    <div>
+      <span>
+        Sort:
+      </span>
+      <SortLink filter={SortFilters.SORT_ASC}>
+        Oldest First
+      </SortLink>
+      <SortLink filter={SortFilters.SORT_DESC}>
+        Newest First
+      </SortLink>
+    </div>
   </div>
 );
 

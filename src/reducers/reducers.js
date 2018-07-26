@@ -3,10 +3,13 @@ import {
   ADD_TODO,
   TOGGLE_TODO,
   SET_VISIBILITY_FILTER,
+  SET_SORT_FILTER,
   VisibilityFilters,
+  SortFilters,
 } from '../actions/actions';
 
 const { SHOW_ALL } = VisibilityFilters;
+const { SORT_DESC, SORT_ASC } = SortFilters;
 
 function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
@@ -25,6 +28,7 @@ function todos(state = [], action) {
         {
           id: action.id,
           text: action.text,
+          date: action.date,
           completed: false,
         },
       ];
@@ -37,6 +41,17 @@ function todos(state = [], action) {
         }
         return todo;
       });
+    case SET_SORT_FILTER:
+      switch (action.filter) {
+        case SORT_ASC:
+          // sort todos ascendingly
+          return state.slice().sort((todo1, todo2) => todo1.date - todo2.date);
+        case SORT_DESC:
+          // sort todos descendingly
+          return state.slice().sort((todo1, todo2) => todo2.date - todo1.date);
+        default:
+          throw new Error(`Unexpected sort: ${action.filter}`);
+      }
     default:
       return state;
   }

@@ -15,7 +15,7 @@ const AddTodo = ({ dispatch }) => {
           if (!input.value.trim()) {
             return;
           }
-          dispatch(addTodo(input.value));
+          dispatch(addTodo(input.value, new Date().getTime() / 1000));
           input.value = '';
         }}
       >
