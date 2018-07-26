@@ -22,7 +22,6 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 
 function showOldTodos(state = true, action) {
-  console.log(`YO YO STATE ${state}`);
   switch (action.type) {
     case TOGGLE_OLD_TODOS:
       return !state;
