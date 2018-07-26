@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import {
   ADD_TODO,
   TOGGLE_TODO,
+  TOGGLE_OLD_TODOS,
   SET_VISIBILITY_FILTER,
   SET_SORT_FILTER,
   VisibilityFilters,
@@ -15,6 +16,16 @@ function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       return action.filter;
+    default:
+      return state;
+  }
+}
+
+function showOldTodos(state = true, action) {
+  console.log(`YO YO STATE ${state}`);
+  switch (action.type) {
+    case TOGGLE_OLD_TODOS:
+      return !state;
     default:
       return state;
   }
@@ -59,6 +70,7 @@ function todos(state = [], action) {
 
 const todoApp = combineReducers({
   visibilityFilter,
+  showOldTodos,
   todos,
 });
 

@@ -6,7 +6,7 @@ export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const SET_SORT_FILTER = 'SET_SORT_FILTER';
-
+export const TOGGLE_OLD_TODOS = 'TOGGLE_OLD_TODOS';
 /**
  * other constants
  */
@@ -24,7 +24,6 @@ export const SortFilters = {
 /**
  * action creators
  */
-
 let nextTodoId = -1;
 export function addTodo(text, seconds) {
   nextTodoId += 1;
@@ -38,6 +37,10 @@ export function addTodo(text, seconds) {
 
 export function toggleTodo(index) {
   return { type: TOGGLE_TODO, index };
+}
+
+export function toggleOldTodos() {
+  return { type: TOGGLE_OLD_TODOS };
 }
 
 export function setVisibilityFilter(filter) {
