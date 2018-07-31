@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
+
 import {
-  ADD_TODO,
-  TOGGLE_TODO,
-  TOGGLE_OLD_TODOS,
-  SET_VISIBILITY_FILTER,
-  SET_SORT_FILTER,
+  updateObject,
+  updateItemInArray,
+  createReducer,
+  sortArray,
+} from './utility';
+
+import {
   VisibilityFilters,
   SortFilters,
 } from '../actions/actions';
@@ -12,65 +15,75 @@ import {
 const { SHOW_ALL } = VisibilityFilters;
 const { SORT_DESC, SORT_ASC } = SortFilters;
 
-function visibilityFilter(state = SHOW_ALL, action) {
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      return action.filter;
+function setVisibilityFilter(visibilityState, action) {
+  return action.filter;
+}
+
+const visibilityFilter = createReducer(SHOW_ALL, {
+  SET_VISIBILITY_FILTER: setVisibilityFilter,
+});
+
+function toggleShowOldTodos(oldTodosState) {
+  return !oldTodosState;
+}
+
+const showOldTodos = createReducer(true, {
+  TOGGLE_OLD_TODOS: toggleShowOldTodos,
+});
+
+function addTodo(todosState, action) {
+  const newTodos = todosState.concat({
+    id: action.id,
+    text: action.text,
+    date: action.date,
+    completed: false,
+  });
+  return newTodos;
+}
+
+function deleteTodo(todosState, action) {
+  const newTodos = todosState.filter(todo => todo.id !== action.id);
+  return newTodos;
+}
+
+function toggleTodo(todosState, action) {
+  const newTodos = updateItemInArray(todosState, action.id,
+    todo => updateObject(todo, { completed: !todo.completed }));
+  return newTodos;
+}
+
+function sortTodos(todosState, action) {
+  switch (action.filter) {
+    case SORT_ASC:
+      // sort todos ascendingly
+      return sortArray(todosState, (todo1, todo2) => todo1.date - todo2.date);
+    case SORT_DESC:
+      // sort todos descendingly
+      return sortArray(todosState, (todo1, todo2) => todo2.date - todo1.date);
     default:
-      return state;
+      throw new Error(`Unexpected sort: ${action.filter}!`);
   }
 }
 
-function showOldTodos(state = true, action) {
-  switch (action.type) {
-    case TOGGLE_OLD_TODOS:
-      return !state;
-    default:
-      return state;
-  }
+function editTodo(todosState, action) {
+  const newTodos = updateItemInArray(todosState, action.id,
+    todo => updateObject(todo, { text: action.text }));
+
+  return newTodos;
 }
 
-function todos(state = [], action) {
-  switch (action.type) {
-    case ADD_TODO:
-      return [
-        ...state,
-        {
-          id: action.id,
-          text: action.text,
-          date: action.date,
-          completed: false,
-        },
-      ];
-    case TOGGLE_TODO:
-      return state.map((todo) => {
-        if (todo.id === action.index) {
-          return Object.assign({}, todo, {
-            completed: !todo.completed,
-          });
-        }
-        return todo;
-      });
-    case SET_SORT_FILTER:
-      switch (action.filter) {
-        case SORT_ASC:
-          // sort todos ascendingly
-          return state.slice().sort((todo1, todo2) => todo1.date - todo2.date);
-        case SORT_DESC:
-          // sort todos descendingly
-          return state.slice().sort((todo1, todo2) => todo2.date - todo1.date);
-        default:
-          throw new Error(`Unexpected sort: ${action.filter}`);
-      }
-    default:
-      return state;
-  }
-}
+const todosReducer = createReducer([], {
+  ADD_TODO: addTodo,
+  TOGGLE_TODO: toggleTodo,
+  EDIT_TODO: editTodo,
+  SET_SORT_FILTER: sortTodos,
+  DELETE_TODO: deleteTodo,
+});
 
 const todoApp = combineReducers({
   visibilityFilter,
   showOldTodos,
-  todos,
+  todos: todosReducer,
 });
 
 export default todoApp;

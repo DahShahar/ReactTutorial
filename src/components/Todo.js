@@ -1,10 +1,8 @@
-/*
- * eslint jsx-a11y/click-events-have-key-events 0
- * eslint jsx-a11y/no-noninteractive-element-interactions 0
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// import EditLink from '../containers/EditLink';
+// import DeleteLink from '../containers/DeleteLink';
 
 const Todo = ({ onClick, completed, text }) => (
   <li

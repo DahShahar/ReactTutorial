@@ -4,9 +4,12 @@
 
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const EDIT_TODO = 'EDIT_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const SET_SORT_FILTER = 'SET_SORT_FILTER';
 export const TOGGLE_OLD_TODOS = 'TOGGLE_OLD_TODOS';
+
 /**
  * other constants
  */
@@ -35,8 +38,16 @@ export function addTodo(text, seconds) {
   };
 }
 
-export function toggleTodo(index) {
-  return { type: TOGGLE_TODO, index };
+export function toggleTodo(id) {
+  return { type: TOGGLE_TODO, id };
+}
+
+export function deleteTodo(id) {
+  return { type: DELETE_TODO, id };
+}
+
+export function editTodo(id, text) {
+  return { type: EDIT_TODO, id, text };
 }
 
 export function toggleOldTodos() {
