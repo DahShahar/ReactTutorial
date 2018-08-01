@@ -37,6 +37,7 @@ function addTodo(todosState, action) {
     text: action.text,
     date: action.date,
     completed: false,
+    isEditing: false,
   });
   return newTodos;
 }
@@ -65,10 +66,18 @@ function sortTodos(todosState, action) {
   }
 }
 
+function toggleEditTodo(todosState, action) {
+  const newTodos = updateItemInArray(todosState, action.id,
+    todo => updateObject(todo, { isEditing: !todo.isEditing }));
+  return newTodos;
+}
+
 function editTodo(todosState, action) {
   const newTodos = updateItemInArray(todosState, action.id,
-    todo => updateObject(todo, { text: action.text }));
-
+    todo => updateObject(todo, {
+      text: action.text,
+      isEditing: !todo.isEditing,
+    }));
   return newTodos;
 }
 
@@ -78,6 +87,7 @@ const todosReducer = createReducer([], {
   EDIT_TODO: editTodo,
   SET_SORT_FILTER: sortTodos,
   DELETE_TODO: deleteTodo,
+  TOGGLE_EDIT_TODO: toggleEditTodo,
 });
 
 const todoApp = combineReducers({

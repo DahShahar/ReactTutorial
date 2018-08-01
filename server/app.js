@@ -9,8 +9,8 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
-import webpackDevServer from './webpack/dev-server';
-import routes from './routes';
+import webpackDevServer from '../webpack/dev-server';
+import routes from '../routes';
 
 // use dotenv
 dotenv.config({
@@ -21,7 +21,7 @@ dotenv.config({
 const app = express();
 
 // View engine
-app.set('views', path.join(__dirname, './views'));
+// app.set('views', path.join(__dirname, './views'));
 
 // include webpack-dev-server for development only
 if (process.env.NODE_ENV !== 'production') {

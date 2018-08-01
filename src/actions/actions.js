@@ -5,6 +5,7 @@
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const EDIT_TODO = 'EDIT_TODO';
+export const TOGGLE_EDIT_TODO = 'TOGGLE_EDIT_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const SET_SORT_FILTER = 'SET_SORT_FILTER';
@@ -44,6 +45,10 @@ export function toggleTodo(id) {
 
 export function deleteTodo(id) {
   return { type: DELETE_TODO, id };
+}
+
+export function toggleEditTodo(id) {
+  return { type: TOGGLE_EDIT_TODO, id };
 }
 
 export function editTodo(id, text) {
